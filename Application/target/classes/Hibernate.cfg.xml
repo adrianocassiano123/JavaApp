@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+	<session-factory><!-- FABRICA DE SESSÃO -->
+
+		<!-- Configurações de comunicação com o BD -->
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/web?useSSL=false&amp;serverTimezone=UTC</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+
+		<!-- JDBC connection pool (use the built-in) Quantas conexoes abre ao mesmo tempo Aqui tá uma por vez /POOL DE CONEXÕES-->
+		<property name="connection.pool_size">1</property>
+
+		<!-- SQL dialect / DIALETO DO MYSQL-->
+		<property name="dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+		<!-- Enable Hibernate's automatic session context management GERENCIAMENTO DO CONTEXTO DAS SESSÕES -->
+		<property name="current_session_context_class">thread</property>
+
+		<!-- Disable the second-level cache CACHE DE SEGUNDO NÍVEL-->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+		<!-- Echo all executed SQL to stdout MOSTRA AS SQLS GERADAS -->
+		<property name="show_sql">true</property>
+
+		<!-- Drop and re-create the database schema on startup CRIA AS TABELAS DO BANCO-->
+		<property name="hbm2ddl.auto">validate</property>
+		
+		<!-- Mapeamento das entidades -->
+		
+		<mapping class="br.com.application.domain.Estado"/>
+		<mapping class="br.com.application.domain.Fabricante"/>
+		
+		
+		<mapping class="br.com.application.domain.Cidade"/>
+		<mapping class="br.com.application.domain.Produto"/>
+		<mapping class="br.com.application.domain.Pessoa"/>
+		<mapping class="br.com.application.domain.Cliente"/>
+		<mapping class="br.com.application.domain.Funcionario"/>
+		<mapping class="br.com.application.domain.Usuario"/>
+		<mapping class="br.com.application.domain.Venda"/>
+		<mapping class="br.com.application.domain.ItemVenda"/>
+		
+
+	</session-factory>
+
+</hibernate-configuration>
