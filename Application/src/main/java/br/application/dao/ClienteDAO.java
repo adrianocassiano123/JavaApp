@@ -1,5 +1,7 @@
 package br.application.dao;
 
-public class ClienteDAO {
+import br.com.application.domain.Cliente;
+
+public class ClienteDAO extends GenericDAO<Cliente> {
 
 }
