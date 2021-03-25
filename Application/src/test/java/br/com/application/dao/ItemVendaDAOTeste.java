@@ -28,25 +28,69 @@ public class ItemVendaDAOTeste {
 	 * System.out.println("Produto Salvo com Sucesso!"); }
 	 */
 
-	@Test
+	//@Test
 	public void salvar() {
 		VendaDAO vendaDAO = new VendaDAO();
-		Venda venda = vendaDAO.buscar(1L);
+		Venda venda = vendaDAO.buscar(3L);
 
 		ProdutoDAO produtoDAO = new ProdutoDAO();
-		Produto produto = produtoDAO.buscar(1L);
+		Produto produto = produtoDAO.buscar(4L);
 
 		ItemVenda itemVenda = new ItemVenda();
 
-		itemVenda.setQuantidade(new Short("12"));
-		itemVenda.setValorParcial(new BigDecimal("23.8"));
+		itemVenda.setQuantidade(new Short("2"));
+		itemVenda.setValorParcial(new BigDecimal("12.5"));
 		itemVenda.setProduto(produto);
 		itemVenda.setVenda(venda);
 
-		//ItemVenda
-		
-		//FALTA FAZER INSERT EM PRODUTO
+		ItemVendaDAO itemvendaDao = new ItemVendaDAO();
+		itemvendaDao.salvar(itemVenda);
 
 	}
 
+	
+	@Test
+	public void buscar() {
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		ItemVenda itemVenda = itemVendaDAO.buscar(2L);
+		
+		if (itemVenda==null) {
+			System.out.println("Item não encontrado");
+		} else {
+			System.out.println("Item venda encontrado");
+			System.out.println("Código do Item - "+itemVenda.getCodigo());
+			System.out.println("Nome Item - "+itemVenda.getProduto().getDescricao());
+		}
+	}
+	
+	//@Test
+	public void excluir() {
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		ItemVenda itemVenda = itemVendaDAO.buscar(4L);
+		
+		itemVendaDAO.excluir(itemVenda);
+	}
+	
+	//@Test
+	public void editar() {
+		
+		VendaDAO vendaDAO = new VendaDAO();
+		Venda venda = vendaDAO.buscar(3L);
+
+		ProdutoDAO produtoDAO = new ProdutoDAO();
+		Produto produto = produtoDAO.buscar(4L);
+		
+		ItemVendaDAO itemVendaDAO = new ItemVendaDAO();
+		ItemVenda itemVenda = itemVendaDAO.buscar(3L);
+
+		itemVenda.setQuantidade(new Short("8"));
+		itemVenda.setValorParcial(new BigDecimal("11.11"));
+		itemVenda.setProduto(produto);
+		itemVenda.setVenda(venda);
+
+		ItemVendaDAO itemvendaDao = new ItemVendaDAO();
+		itemvendaDao.editar(itemVenda);
+		
+	}
+	
 }

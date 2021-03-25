@@ -72,6 +72,7 @@ public class FabricanteDAOteste {
 	}
 
 	@Test
+	@Ignore
 	public void editar() {
 		Long codigo = 1L;
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();

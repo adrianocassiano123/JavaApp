@@ -16,13 +16,13 @@ public class ProdutoDAOTeste {
 	public void salvar() {
 
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
-		Fabricante fabricante = fabricanteDAO.buscar(1L);
+		Fabricante fabricante = fabricanteDAO.buscar(2L);
 
 		Produto produto = new Produto();
-		produto.setDescricao("Sabonete");
+		produto.setDescricao("Desodorante Antitranspirante");
 		produto.setFabricante(fabricante);// Chave estrangeira tem que criar o fabricante
-		produto.setPreco(new BigDecimal("1.98")); // tem que criar o tipo antes assim como o short quantidade
-		produto.setQuantidade(new Short("7"));
+		produto.setPreco(new BigDecimal("9.25")); // tem que criar o tipo antes assim como o short quantidade
+		produto.setQuantidade(new Short("22"));
 
 		ProdutoDAO produtoDAO = new ProdutoDAO();
 		produtoDAO.salvar(produto);
