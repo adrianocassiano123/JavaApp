@@ -22,4 +22,39 @@ public class Usuario extends GenericDomain{
 	@OneToOne
 	private Pessoa pessoa;
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public Character getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(Character tipo) {
+		this.tipo = tipo;
+	}
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+	
+	
+	
+
 }
