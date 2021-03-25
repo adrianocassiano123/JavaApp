@@ -12,11 +12,11 @@ import br.com.application.domain.Produto;
 
 public class ProdutoDAOTeste {
 
-	// @Test
+	@Test
 	public void salvar() {
 
 		FabricanteDAO fabricanteDAO = new FabricanteDAO();
-		Fabricante fabricante = fabricanteDAO.buscar(2L);
+		Fabricante fabricante = fabricanteDAO.buscar(1L);
 
 		Produto produto = new Produto();
 		produto.setDescricao("Sabonete");
@@ -68,6 +68,7 @@ public class ProdutoDAOTeste {
 	}
 
 	@Test
+	@Ignore
 	public void editar() {
 		Long codigo = 1L;
 		ProdutoDAO produtoDAO = new ProdutoDAO();
