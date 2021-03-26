@@ -10,9 +10,9 @@ public class HibernateUtilTeste {
 	@Test
 	public void conectar() {
 		
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		sessao.close();
-		HibernateUtil.getFabricaDeSessoes().close();
+		HibernateUtil.getSessionFactory().close();
 		
 	}
 }

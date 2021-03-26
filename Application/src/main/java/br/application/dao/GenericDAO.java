@@ -22,8 +22,8 @@ public class GenericDAO<Entidade> {
 	}
 
 	public void salvar(Entidade entidade) {
-
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession(); // capturar uma sessao aberta
+		Session sessao = HibernateUtil.getSessionFactory().openSession(); // capturar uma sessao aberta
+		//Session sessao = HibernateUtil.getFabricaDeSessoes().openSession(); // capturar uma sessao aberta
 		Transaction transacao = null; // capturar um transaction
 
 		try {
@@ -48,13 +48,13 @@ public class GenericDAO<Entidade> {
 	@SuppressWarnings("unchecked")
 	public List<Entidade> listar() {
 
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
 
 		try {
 
 			Criteria consulta = sessao.createCriteria(classe);// fazer listagem = forma orientada a objetos
 			List<Entidade> resultado = consulta.list();// variavel para guardar o
-			return resultado;			
+			return resultado;
 
 		} catch (Exception erro) {
 			throw erro;
@@ -63,10 +63,10 @@ public class GenericDAO<Entidade> {
 		}
 
 	}
-	
+
 	public Entidade buscar(Long codigo) {
 
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession();
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
 
 		try {
 
@@ -89,7 +89,7 @@ public class GenericDAO<Entidade> {
 
 	public void excluir(Entidade entidade) {
 
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession(); // capturar uma sessao aberta
+		Session sessao = HibernateUtil.getSessionFactory().openSession(); // capturar uma sessao aberta
 		Transaction transacao = null; // capturar um transaction
 
 		try {
@@ -113,7 +113,7 @@ public class GenericDAO<Entidade> {
 
 	public void editar(Entidade entidade) {
 
-		Session sessao = HibernateUtil.getFabricaDeSessoes().openSession(); // capturar uma sessao aberta
+		Session sessao = HibernateUtil.getSessionFactory().openSession(); // capturar uma sessao aberta
 		Transaction transacao = null; // capturar um transaction
 
 		try {
@@ -132,9 +132,31 @@ public class GenericDAO<Entidade> {
 		} finally {
 			sessao.close();
 		}
-		
-		
-		
 
 	}
+	
+	public void merge(Entidade entidade) {
+
+		Session sessao = HibernateUtil.getSessionFactory().openSession(); // capturar uma sessao aberta
+		Transaction transacao = null; // capturar um transaction
+
+		try {
+			transacao = sessao.beginTransaction(); // para criar uma transacao precisa de uma sessao
+			sessao.merge(entidade);
+			transacao.commit();
+
+		} catch (RuntimeException erro) { // caso dê alguma coisa errada na transacao temos que desfazer( roollbak) no
+											// catch
+
+			if (transacao != null) {
+				transacao.rollback();
+			}
+			throw erro;
+
+		} finally {
+			sessao.close();
+		}
+
+	}
+
 }

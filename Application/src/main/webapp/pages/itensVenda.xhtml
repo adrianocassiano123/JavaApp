@@ -6,11 +6,11 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Fabricantes</title>
+	<title>Itens Venda</title>
 </h:head>
 <h:body>
 	<h:form>
-		<p:panel header="Fabricantes - Listagem">
+		<p:panel header="Vendas - Listagem">
 			<p:dataTable emptyMessage="Nenhum registro encontrado"
 				paginator="true">
 
@@ -18,22 +18,44 @@
 					<p:commandButton value="Novo" oncomplete="PF('dialogo').show();" />
 				</f:facet>
 
-				<p:column headerText="Descrição"></p:column>
+				<p:column headerText="Item"></p:column>
+				
+				<p:column headerText="Produto"></p:column>
+
+				<p:column headerText="Venda"></p:column>
+				
+				<p:column headerText="Valor Parcial"></p:column>
+
 				<p:column headerText="Opções"></p:column>
+
 
 
 			</p:dataTable>
 		</p:panel>
 	</h:form>
-	<p:dialog header="Fabricantes - Cadastro" widgetVar="dialogo"
+	<p:dialog header="Produtos - Cadastro" widgetVar="dialogo"
 		draggable="false" resizable="false" modal="true" closable="false">
 		<h:form>
 			<h:panelGrid columns="2">
-				<p:outputLabel value="Descrição" />
-				<p:inputText maxlength="50" size="30" />
+				<p:outputLabel value="Quantidade" />
+				<p:inputText maxlength="5" size="10" />
+				
+				<p:outputLabel value="Funcionário" />
+				<p:selectOneMenu filter="true">
+					<f:selectItem itemValue="" itemLabel="Selecione um Produto" />
+				</p:selectOneMenu>
+				
+				<p:outputLabel value="Cliente" />
+				<p:selectOneMenu filter="true">
+					<f:selectItem itemValue="" itemLabel="Selecione uma Venda" />
+				</p:selectOneMenu>
 
+				<p:outputLabel value="Valor Parcial" />
+				<p:inputText maxlength="7" size="10" />
+				
 			</h:panelGrid>
-			<h:panelGrid columns="1">
+
+			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" />
 				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();" />
 			</h:panelGrid>

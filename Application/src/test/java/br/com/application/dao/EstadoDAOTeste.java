@@ -9,12 +9,12 @@ import br.com.application.domain.Estado;
 
 public class EstadoDAOTeste {
 
-	//@Test
+	@Test
 	//@Ignore // serve para ignorar esse teste
 	public void salvar() {
 		Estado estado = new Estado();
-		estado.setNome("Rio Grande do Sul");
-		estado.setSigla("RS");
+		estado.setNome("Rio de Janeiro");
+		estado.setSigla("RJ");
 
 		EstadoDAO estadoDAO = new EstadoDAO();
 		estadoDAO.salvar(estado);
@@ -36,7 +36,7 @@ public class EstadoDAOTeste {
 	 * 
 	 */
 
-	@Test
+	//@Test
 	//@Ignore
 	public void buscar() {
 
@@ -48,7 +48,7 @@ public class EstadoDAOTeste {
 			System.out.println("Não foi possivel encontrar o codigo especificado");
 		} else {
 
-			System.out.println("Excluido com sucesso");
+			System.out.println("Encontrado");
 			System.out.println(estado.getCodigo() + " - " + estado.getSigla() + "-" + estado.getNome());
 		}
 

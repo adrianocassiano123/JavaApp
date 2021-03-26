@@ -7,26 +7,52 @@ import org.hibernate.service.ServiceRegistry;
 
 public class HibernateUtil {
 
-	private static SessionFactory fabricaDeSessoes = criarFabricaDeSessoes();
+//	private static SessionFactory fabricaDeSessoes = criarFabricaDeSessoes();
+//
+//	public static SessionFactory getFabricaDeSessoes() {
+//		return fabricaDeSessoes;
+//	}
+//
+//	private static SessionFactory criarFabricaDeSessoes() {
+//
+//		try {
+//			Configuration configuracao = new Configuration().configure();
+//			ServiceRegistry registro = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties())
+//					.build();
+//
+//			SessionFactory fabrica = configuracao.buildSessionFactory(registro);
+//
+//			return fabrica;
+//		} catch (Throwable ex) {
+//			System.err.println("A fabrica de sessões nao pode ser criada." + ex);
+//			throw new ExceptionInInitializerError(ex);
+//		}
+//
+//	}
 
-	public static SessionFactory getFabricaDeSessoes() {
-		return fabricaDeSessoes;
-	}
+	private static final SessionFactory sessionFactory = buildSessionFactory();
 
-	private static SessionFactory criarFabricaDeSessoes() {
-
+	private static SessionFactory buildSessionFactory() {
 		try {
-			Configuration configuracao = new Configuration().configure();
-			ServiceRegistry registro = new StandardServiceRegistryBuilder().applySettings(configuracao.getProperties())
-					.build();
+			// Create the SessionFactory from hibernate.cfg.xml
+			Configuration configuration = new Configuration();
+			configuration.configure();
 
-			SessionFactory fabrica = configuracao.buildSessionFactory(registro);
+			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+					.applySettings(configuration.getProperties()).build();
 
-			return fabrica;
+			SessionFactory sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+
+			return sessionFactory;
 		} catch (Throwable ex) {
-			System.err.println("A fabrica de sessões nao pode ser criada." + ex);
+			// Make sure you log the exception, as it might be swallowed
+			System.err.println("Initial SessionFactory creation failed." + ex);
 			throw new ExceptionInInitializerError(ex);
 		}
-
 	}
+
+	public static SessionFactory getSessionFactory() {
+		return sessionFactory;
+	}
+
 }
