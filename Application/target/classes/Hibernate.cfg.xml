@@ -29,7 +29,7 @@
 		<property name="show_sql">true</property>
 
 		<!-- Drop and re-create the database schema on startup CRIA AS TABELAS DO BANCO-->
-		<property name="hbm2ddl.auto">validate</property>
+		<property name="hbm2ddl.auto">update</property>
 		
 		<!-- Mapeamento das entidades -->
 		

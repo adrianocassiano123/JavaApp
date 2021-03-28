@@ -13,8 +13,8 @@ public class EstadoDAOTeste {
 	//@Ignore // serve para ignorar esse teste
 	public void salvar() {
 		Estado estado = new Estado();
-		estado.setNome("Rio de Janeiro");
-		estado.setSigla("RJ");
+		estado.setNome("Piauí");
+		estado.setSigla("PI");
 
 		EstadoDAO estadoDAO = new EstadoDAO();
 		estadoDAO.salvar(estado);
