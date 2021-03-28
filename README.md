@@ -1,1 +1,3 @@
 # JavaApp
+
+Aplicação na linguagem Java utilizando Hibernate, Maven, Primefaces ...
