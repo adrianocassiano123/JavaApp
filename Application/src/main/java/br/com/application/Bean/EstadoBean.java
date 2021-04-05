@@ -19,7 +19,7 @@ import br.com.application.domain.Estado;
 public class EstadoBean implements Serializable {
 
 	private Estado estado;
-	
+
 	private List<Estado> estados;
 
 	public Estado getEstado() {
@@ -29,24 +29,23 @@ public class EstadoBean implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-	
-	
+
 	public List<Estado> getEstados() {
 		return estados;
 	}
-	
+
 	public void setEstados(List<Estado> estados) {
 		this.estados = estados;
 	}
-	
-	@PostConstruct  //Chamado após o construtor
+
+	@PostConstruct // Chamado após o construtor
 	public void listar() {
 		try {
-			
+
 			EstadoDAO estadoDAO = new EstadoDAO();
 			estados = estadoDAO.listar();
-			
-		}  catch (RuntimeException erro) {
+
+		} catch (RuntimeException erro) {
 			Messages.addGlobalError("Ocorreu erro ao tentar listar estado");
 			erro.printStackTrace();
 		}
@@ -66,9 +65,13 @@ public class EstadoBean implements Serializable {
 		try {
 
 			EstadoDAO estadoDAO = new EstadoDAO();
-			estadoDAO.salvar(estado);
+			estadoDAO.merge(estado);
+
+			estado = new Estado();
+			estados= estadoDAO.listar();
 
 			novo();
+			// estados = estadoDAO.listar();
 
 			Messages.addGlobalInfo("Estado salvo com sucesso!");
 
@@ -77,12 +80,29 @@ public class EstadoBean implements Serializable {
 			erro.printStackTrace();
 		}
 	}
-	
-	
-	private void excluir (ActionEvent evento) { // parametro é para capturar
+
+	public void excluir(ActionEvent evento) { // parametro é para capturar coisas que são mandadas
+		
+		try {			
+		
 		estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
 		
-		Messages.addGlobalInfo("nome :" + estado.getNome() + "Sigla : " + estado.getSigla());
+		EstadoDAO estadoDAO = new EstadoDAO();
+		estadoDAO.excluir(estado);
+		estados= estadoDAO.listar();
+		
+		Messages.addGlobalInfo("Estado Removido com Sucesso");
+		
+		} catch (RuntimeException erro) {
+			Messages.addGlobalError("Ocorreu um erro ao tentar remover o estado");
+			erro.printStackTrace();
+		}
 
+	}
+	
+	
+	public void editar(ActionEvent evento) {
+		estado = (Estado) evento.getComponent().getAttributes().get("estadoSelecionado");
+		
 	}
 }
